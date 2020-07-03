@@ -64,7 +64,7 @@ public class Lesson2 {
 
         int[] arrTask5 = {4, 5, 0, 3, 2, 11, -12, 4, 5, 2, 4, 8, 9, 15, 1, -16};
         int minNumb = arrTask5[0];
-        int maxNumb = 0;
+        int maxNumb = arrTask5[0];
 
         for (int i = 0; i < arrTask5.length; i++) {
             if (i == arrTask5.length-1) {
