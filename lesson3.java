@@ -10,7 +10,6 @@ public class lesson3 {
     }
 
     public static Scanner userInput1 = new Scanner(System.in);
-    public static Scanner userInput2 = new Scanner(System.in);
 
     public static void checkCorrectAnswer () {
         int counter = 3;
@@ -48,14 +47,13 @@ public class lesson3 {
 
     public static void restartGame () {
         System.out.println("Сыграть ещё? Да - введите 1, Нет - 0");
-        int answer2 = userInput2.nextInt();
+        int answer2 = userInput1.nextInt();
         if (answer2 == 1) {
             checkCorrectAnswer();
         } else {
             System.out.println("Спасибо за игру!!!");
         }
         userInput1.close();
-        userInput2.close();
     }
 
 }
