@@ -31,7 +31,7 @@ public class lesson3_1 {
         char[] arrResult = new char[15];
 
         for (int i = 0; i < 15; i ++) {
-            if (i >= correctAnswer.length() - 1 || i >= answer.length() - 1) {
+            if (i >= correctAnswer.length() || i >= answer.length()) {
                 arrResult[i] = '#';
                 continue;
             }
