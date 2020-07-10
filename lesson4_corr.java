@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class lesson4 {
 
-    public static int SIZE = 5;
-    public static int DOTS_TO_WIN = 4;
+    public static final int SIZE = 5;
+    public static final int DOTS_TO_WIN = 4;
     public static final char DOT_EMPTY = '•';
     public static final char DOT_X = 'X';
     public static final char DOT_O = 'O';
@@ -20,7 +20,7 @@ public class lesson4 {
         while (true) {
             humanTurn();
             printMap();
-            if (checkTrue ()) {
+            if (checkWin()) {
                 System.out.println("Победил человек!");
                 break;
             }
@@ -30,7 +30,7 @@ public class lesson4 {
             }
             aiTurn();
             printMap();
-            if (checkTrue ()) {
+            if (checkWin ()) {
                 System.out.println("Победил Искуственный Интеллект!");
                 break;
             }
@@ -104,17 +104,17 @@ public class lesson4 {
         System.out.println();
     }
 
-    private static boolean checkTrue () {
+    private static boolean checkWin () {
 
         int circle = 0;
         char value = DOT_X;
-        int counter;
+        int counter, mapX, mapY;
 
         while (circle < 2) {
 
             // 1. Поиск по горизонтали (4 подряд - true)
-            counter = 0;
             for (int i = 0; i < SIZE; i++) {
+                counter = 0;
                 for (int j = 0; j < SIZE; j++) {
                     if (map[i][j] != value) {
                         counter = 0;
@@ -126,8 +126,8 @@ public class lesson4 {
             }
 
             // 2. Поиск по вертикали (4 подряд - true)
-            counter = 0;
             for (int i = 0; i < SIZE; i++) {
+                counter = 0;
                 for (int j = 0; j < SIZE; j++) {
                     if (map[j][i] != value) {
                         counter = 0;
@@ -140,69 +140,119 @@ public class lesson4 {
 
             // 3. Поиск по диагонали (4 подряд - true)
             counter = 0;
-            for (int i = 0; i < SIZE; i++) {
-                for (int j = 0; j < SIZE; j++) {
-                    if (map[i][j] != value) {
-                        counter = 0;
-                        continue;
-                    }
-                    if (map[i][j] == value) counter++;
-                    if (counter == DOTS_TO_WIN) return true;
+            mapX = 0;
+            mapY = 0;
+            while (mapX < 5) {
+                if (map[mapX][mapY] == value) {
+                    mapX++;
+                    counter++;
                 }
+                else {
+                    counter = 0;
+                    mapX++;
+                }
+                mapY++;
+            }
+            if (counter == 4) {
+                return true;
             }
 
             // 4. Поиск по обратной диагонали (4 подряд - true)
             counter = 0;
-            for (int i = SIZE-1; i >= 0; i--) {
-                for (int j = 0; j < SIZE; j++) {
-                    if (map[i][j] != value) {
-                        counter = 0;
-                        continue;
-                    }
-                    if (map[i][j] == value) counter++;
-                    if (counter == DOTS_TO_WIN) return true;
+            mapX = 4;
+            mapY = 0;
+            while (mapX >= 0) {
+                if (map[mapX][mapY] == value) {
+                    mapX--;
+                    counter++;
                 }
+                else {
+                    counter = 0;
+                    mapX--;
+                }
+                mapY++;
+            }
+            if (counter == 4) {
+                return true;
             }
 
             // 5. Поиск по обратной диагонали (верхн.) (4 подряд - true)
             counter = 0;
-            for (int i = SIZE-2; i >= 0; i--) {
-                for (int j = 0; j < SIZE-2; j++) {
-                    if (map[i][j] != value) continue;
-                    if (map[i][j] == value) counter++;
-                    if (counter == DOTS_TO_WIN) return true;
+            mapX = 3;
+            mapY = 0;
+            while (mapX >= 0) {
+                if (map[mapX][mapY] == value) {
+                    mapX--;
+                    counter++;
                 }
+                else {
+                    counter = 0;
+                    mapX--;
+                }
+                mapY++;
             }
+            if (counter == 4) {
+                return true;
+            }
+
 
             // 6. Поиск по обратной диагонали (нижн.) (4 подряд - true)
             counter = 0;
-            for (int i = SIZE-1; i > 0; i--) {
-                for (int j = 1; j < SIZE; j++) {
-                    if (map[i][j] != value) continue;
-                    if (map[i][j] == value) counter++;
-                    if (counter == DOTS_TO_WIN) return true;
+            mapX = 4;
+            mapY = 1;
+            while (mapX >= 1) {
+                if (map[mapX][mapY] == value) {
+                    mapX--;
+                    counter++;
+                    continue;
+                } else {
+                    counter = 0;
+                    mapX--;
                 }
+                mapY++;
+            }
+            if (counter == 4) {
+                return true;
             }
 
             // 7. Поиск по диагонали (верх.) (4 подряд - true)
             counter = 0;
-            for (int i = 1; i < SIZE; i++) {
-                for (int j = 0; j < SIZE-2; j++) {
-                    if (map[i][j] != value) continue;
-                    if (map[i][j] == value) counter++;
-                    if (counter == DOTS_TO_WIN) return true;
+            mapX = 1;
+            mapY = 0;
+            while (mapX < 5) {
+                if (map[mapX][mapY] == value) {
+                    mapX++;
+                    counter++;
+                    continue;
+                } else {
+                    counter = 0;
+                    mapX++;
                 }
+                mapY++;
+            }
+            if (counter == 4) {
+                return true;
             }
 
             // 8. Поиск диагонали (нижн.) (4 подряд - true)
             counter = 0;
-            for (int i = 0; i < SIZE-2; i++) {
-                for (int j = 1; j < SIZE; j++) {
-                    if (map[i][j] != value) continue;
-                    if (map[i][j] == value) counter++;
-                    if (counter == DOTS_TO_WIN) return true;
+            mapX = 0;
+            mapY = 1;
+            while (mapX < 4) {
+                if (map[mapX][mapY] == value) {
+                    mapX++;
+                    counter++;
+                    continue;
+                } else {
+                    counter = 0;
+                    mapX++;
                 }
+                mapY++;
             }
+            if (counter == 4) {
+                return true;
+            }
+
             value = DOT_O;
             circle++;
         }
