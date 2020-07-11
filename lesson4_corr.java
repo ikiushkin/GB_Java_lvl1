@@ -30,7 +30,7 @@ public class lesson4 {
             }
             aiTurn();
             printMap();
-            if (checkWin ()) {
+            if (checkWin()) {
                 System.out.println("Победил Искуственный Интеллект!");
                 break;
             }
@@ -104,7 +104,7 @@ public class lesson4 {
         System.out.println();
     }
 
-    private static boolean checkWin () {
+    private static boolean checkWin() {
 
         int circle = 0;
         char value = DOT_X;
@@ -120,8 +120,12 @@ public class lesson4 {
                         counter = 0;
                         continue;
                     }
-                    if (map[i][j] == value) counter++;
-                    if (counter == DOTS_TO_WIN) return true;
+                    if (map[i][j] == value) {
+                        counter++;
+                    }
+                    if (counter == DOTS_TO_WIN) {
+                        return true;
+                    }
                 }
             }
 
@@ -133,8 +137,12 @@ public class lesson4 {
                         counter = 0;
                         continue;
                     }
-                    if (map[j][i] == value) counter++;
-                    if (counter == DOTS_TO_WIN) return true;
+                    if (map[j][i] == value) {
+                        counter++;
+                    }
+                    if (counter == DOTS_TO_WIN) {
+                        return true;
+                    }
                 }
             }
 
@@ -144,17 +152,15 @@ public class lesson4 {
             mapY = 0;
             while (mapX < 5) {
                 if (map[mapX][mapY] == value) {
-                    mapX++;
                     counter++;
-                }
-                else {
+                } else {
                     counter = 0;
-                    mapX++;
                 }
+                if (counter == 4) {
+                    return true;
+                }
+                mapX++;
                 mapY++;
-            }
-            if (counter == 4) {
-                return true;
             }
 
             // 4. Поиск по обратной диагонали (4 подряд - true)
@@ -163,17 +169,15 @@ public class lesson4 {
             mapY = 0;
             while (mapX >= 0) {
                 if (map[mapX][mapY] == value) {
-                    mapX--;
                     counter++;
-                }
-                else {
+                } else {
                     counter = 0;
-                    mapX--;
+                }
+                if (counter == 4) {
+                    return true;
                 }
                 mapY++;
-            }
-            if (counter == 4) {
-                return true;
+                mapX--;
             }
 
             // 5. Поиск по обратной диагонали (верхн.) (4 подряд - true)
@@ -182,17 +186,15 @@ public class lesson4 {
             mapY = 0;
             while (mapX >= 0) {
                 if (map[mapX][mapY] == value) {
-                    mapX--;
                     counter++;
-                }
-                else {
+                } else {
                     counter = 0;
-                    mapX--;
                 }
+                if (counter == 4) {
+                    return true;
+                }
+                mapX--;
                 mapY++;
-            }
-            if (counter == 4) {
-                return true;
             }
 
 
@@ -202,17 +204,15 @@ public class lesson4 {
             mapY = 1;
             while (mapX >= 1) {
                 if (map[mapX][mapY] == value) {
-                    mapX--;
                     counter++;
-                    continue;
                 } else {
                     counter = 0;
-                    mapX--;
                 }
+                if (counter == 4) {
+                    return true;
+                }
+                mapX--;
                 mapY++;
-            }
-            if (counter == 4) {
-                return true;
             }
 
             // 7. Поиск по диагонали (верх.) (4 подряд - true)
@@ -221,18 +221,17 @@ public class lesson4 {
             mapY = 0;
             while (mapX < 5) {
                 if (map[mapX][mapY] == value) {
-                    mapX++;
                     counter++;
-                    continue;
                 } else {
                     counter = 0;
-                    mapX++;
                 }
+                if (counter == 4) {
+                    return true;
+                }
+                mapX++;
                 mapY++;
             }
-            if (counter == 4) {
-                return true;
-            }
+
 
             // 8. Поиск диагонали (нижн.) (4 подряд - true)
             counter = 0;
@@ -240,17 +239,15 @@ public class lesson4 {
             mapY = 1;
             while (mapX < 4) {
                 if (map[mapX][mapY] == value) {
-                    mapX++;
                     counter++;
-                    continue;
                 } else {
                     counter = 0;
-                    mapX++;
                 }
+                if (counter == 4) {
+                    return true;
+                }
+                mapX++;
                 mapY++;
-            }
-            if (counter == 4) {
-                return true;
             }
 
             value = DOT_O;
@@ -258,5 +255,4 @@ public class lesson4 {
         }
         return false;
     }
-
 }
